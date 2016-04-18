@@ -44,9 +44,6 @@ class JetPack {
       return;
     }
 
-    $all_post_meta = get_post_meta($post->ID);
-    echo '<pre>_wpas_done_all:' . print_r(get_post_meta($post->ID, '_wpas_done_all', true), true) . '</pre>';
-
     if (isset($_GET['post']) && get_post_meta($post->ID, '_wpas_done_all', true) == 1 && get_post_status($post->ID) !== 'publish') {
       $type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
       $action = 'clear_jetpack_published';
