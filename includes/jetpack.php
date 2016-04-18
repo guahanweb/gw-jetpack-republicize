@@ -37,6 +37,19 @@ class JetPack {
     }
   }
 
+  public function clearPublished() {
+    if (empty($_REQUEST['post'])) {
+      wp_die(__('Invalid post ID or action', $this->config->domain));
+    }
+
+    $id = isset($_REQUEST['post']) ? absint($_REQUEST['post']) : '';
+    check_admin_referer('clear_jetpack_published_' . $id);
+
+    $this->unpublicize($id);
+    wp_redirect(admin_url('post.php?action=edit&post=' . $id));
+    exit;
+  }
+
   public function addClearLink() {
     global $post;
     if (!current_user_can('publish_posts') || !is_object($post)) {
@@ -64,6 +77,7 @@ class JetPack {
 
   public function listen() {
     add_action('post_submitbox_start', array($this, 'addClearLink'));
+    add_action('admin_action_clear_jetpack_published', array($this, 'clearPublished'));
   }
 }
 
