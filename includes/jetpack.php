@@ -38,11 +38,15 @@ class JetPack {
   }
 
   public function addClearLink() {
-    echo 'here';
     global $post;
     if (!current_user_can('publish_posts') || !is_object($post)) {
+      echo 'fail';
       return;
     }
+
+    global $wpdb;
+    $all_post_meta = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
+    echo '<pre>' . print_r($all_post_meta, true) . '</pre>';
 
     if (isset($_GET['post']) && get_post_meta($post->ID, '_wpas_done_all', true) == 1 && get_post_status($post->ID) !== 'publish') {
       $type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
