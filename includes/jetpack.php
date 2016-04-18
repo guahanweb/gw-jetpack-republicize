@@ -64,8 +64,10 @@ class JetPack {
       );
 
       if (isset($_GET['post_type'])) {
-        $query[] = 'post_type=' . $_GET['post_type'];
+        $query[] = 'post_type=' . $post->post_type;
       }
+
+      echo '<pre>' . print_r($query, true) . '</pre>';
 
       $notifyUrl = wp_nonce_url(admin_url('edit.php?' . implode('&', $query)), 'clear_jetpack_published_' . $_GET['post']);
       printf('<div id="jetpack-clear-action"><a class="submitjetpackclear jetpackclear" href="%s">%s</a></div>',
