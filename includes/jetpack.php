@@ -57,8 +57,6 @@ class JetPack {
       return;
     }
 
-    echo '<pre>'.print_r(array($_GET['post'], get_post_meta($post->ID), get_post_status($post->ID)), true) . '</pre>';
-
     if (isset($_GET['post']) && get_post_meta($post->ID, '_wpas_done_all', true) == 1 && get_post_status($post->ID) !== 'publish') {
       $query = array(
         'post=' . absint($_GET['post']),
