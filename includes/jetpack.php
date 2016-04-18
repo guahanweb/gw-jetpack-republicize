@@ -38,6 +38,7 @@ class JetPack {
   }
 
   public function addClearLink() {
+    echo 'here';
     global $post;
     if (!current_user_can('publish_posts') || !is_object($post)) {
       return;
