@@ -28,11 +28,7 @@ class JetPack {
     $post_id = intval($post_id);
     $all_post_meta = get_post_meta($post_id);
     if (count($all_post_meta) != 0) {
-      var_dump($all_post_meta);
-      exit;
-
       foreach ($all_post_meta as $meta_key => $meta_array) {
-        $meta_key = $post_meta->meta_key;
         if (preg_match('/_wpas_(done_all|mess|skip_)/', $meta_key)) {
           delete_post_meta($post_id, $meta_key);
         }
