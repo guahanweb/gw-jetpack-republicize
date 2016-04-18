@@ -64,10 +64,6 @@ class Plugin {
     delete_option('gw_jetpack_republicize_version');
     do_action('gw_jetpack_republicize-deactivate');
   }
-
-  public function deactivate() {
-
-  }
 }
 
 function gw_jetpack_republicize_init() {
