@@ -24,7 +24,7 @@ class Config {
     return null;
   }
 
-  private function __set($k, $v) {
+  public function __set($k, $v) {
     $this->data->$k = $v;
   }
 
