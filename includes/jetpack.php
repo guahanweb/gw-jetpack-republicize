@@ -26,9 +26,9 @@ class JetPack {
     global $wpdb;
 
     $post_id = intval($post_id);
-    $all_post_meta = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
+    $all_post_meta = get_post_meta($post_id);
     if (count($all_post_meta) != 0) {
-      foreach ($all_post_meta as $post_meta) {
+      foreach ($all_post_meta as $meta_key => $meta_array) {
         $meta_key = $post_meta->meta_key;
         if (preg_match('/_wpas_(done_all|mess|skip_)/', $meta_key)) {
           delete_post_meta($post_id, $meta_key);
