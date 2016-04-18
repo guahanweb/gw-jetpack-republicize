@@ -45,11 +45,18 @@ class JetPack {
     }
 
     if (isset($_GET['post']) && get_post_meta($post->ID, '_wpas_done_all', true) == 1 && get_post_status($post->ID) !== 'publish') {
-      $type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
-      $action = 'clear_jetpack_published';
-      $notifyUrl = wp_nonce_url(admin_url('edit.php?post_type='.$type.'&action='.$action.'&post='.absint($_GET['post'])), 'clear_jetpack_published_'.$_GET['post']);
+      $query = array(
+        'post=' . absint($_GET['post']),
+        'action=clear_jetpack_published'
+      );
+
+      if (isset($_GET['post_type'])) {
+        $query[] = 'post_type=' . $_GET['post_type'];
+      }
+
+      $notifyUrl = wp_nonce_url(admin_url('edit.php?' . implode('&', $query)), 'clear_jetpack_published_' . $_GET['post']);
       printf('<div id="jetpack-clear-action"><a class="submitjetpackclear jetpackclear" href="%s">%s</a></div>',
-        $notifyUrl,
+        esc_url($notifyUrl),
         __('Clear JetPack Publicized Status', $this->config->domain)
       );
     }
