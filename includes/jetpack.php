@@ -45,7 +45,7 @@ class JetPack {
     }
 
     global $wpdb;
-    $all_post_meta = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
+    $all_post_meta = get_post_meta($post->ID);
     echo '<pre>' . print_r($all_post_meta, true) . '</pre>';
 
     if (isset($_GET['post']) && get_post_meta($post->ID, '_wpas_done_all', true) == 1 && get_post_status($post->ID) !== 'publish') {
