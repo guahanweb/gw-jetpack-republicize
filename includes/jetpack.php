@@ -59,4 +59,10 @@ class JetPack {
   }
 }
 
+function gw_jetpack_republicize_jetpack_init() {
+  return JetPack::instance();
+}
+
+$gw_jetpack_republicize_jetpack = gw_jetpack_republicize_jetpack_init();
+
 endif;
